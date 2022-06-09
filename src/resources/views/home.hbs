@@ -1,6 +1,15 @@
-<h1>HOME PAGE</h1>
-<h2>HOME PAGE</h2>
-<h3>HOME PAGE</h3>
-<h4>HOME PAGE</h4>
-<h5>HOME PAGE</h5>
-<h6>HOME PAGE</h6>
+<div class="mt-4">
+  <div class="row">
+  {{#each courses}}
+       <div class="col-sm-6 col-lg-4">
+         <div class="card">
+            <img class="card-img-top" src="{{this.image}}" alt="{{this.name}}">
+              <div class="card-body">
+                   <h5 class="card-title">{{this.name}}</h5>
+                       <p class="card-text">{{this.descriptions}}</p>
+                         <a href="#" class="btn btn-primary">Xem bai viet</a>
+                  </div>
+           </div>
+    </div>
+  {{/each}}
+</div>
