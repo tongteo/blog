@@ -8,7 +8,7 @@ const port = 1994;
 const route = require('./routes');
 const db = require('./config/db/');
 
-//connect to datab;
+//connect to database
 db.connect();
 
 app.use(express.static(path.join(__dirname, 'public')));
