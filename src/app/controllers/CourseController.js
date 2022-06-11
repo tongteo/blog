@@ -17,12 +17,11 @@ class CourseController {
     }
     //[PUT] /courses/:slug
     store(req, res, next) {
-        const formData = req.body;
-        formData.image = `https://img.youtube.com/vi/${req.body.videoId}/sddefault.jpg`;
-        const course = new Course(formData);
+        req.body.image = `https://img.youtube.com/vi/${req.body.videoId}/sddefault.jpg`;
+        const course = new Course(req.body);
         course
             .save()
-            .then(() => res.redirect('/'))
+            .then(() => res.redirect('/me/stored/courses'))
             .catch((error) => {});
     }
     //[GET] /courses/:slug/edit
@@ -43,7 +42,19 @@ class CourseController {
     }
     //[DELETE] /courses/:slug
     destroy(req, res, next) {
+        Course.delete({ slug: req.params.slug })
+            .then(() => res.redirect('back'))
+            .catch(next);
+    }
+    //[DELETE] /courses/:slug/force
+    forceDestroy(req, res, next) {
         Course.deleteOne({ slug: req.params.slug })
+            .then(() => res.redirect('back'))
+            .catch(next);
+    }
+    //[PATCH] /courses/:slug/restore
+    restore(req, res, next) {
+        Course.restore({ slug: req.params.slug })
             .then(() => res.redirect('back'))
             .catch(next);
     }
