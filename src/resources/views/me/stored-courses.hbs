@@ -13,7 +13,7 @@
                       <select class="form-control form-control-sm checkbox-select-all-options" name="action">
                             <option value="delete">Xóa</option>
                     </select>
-                <button class="btn btn-primary btn-sm check-all-submit-btn disabled">Thực hiện</button>
+                <button class="btn btn-primary btn-sm check-all-submit-btn" disabled="disabled" >Thực hiện</button>
         </div>
     <div class="text-right">
         <a href="/courses/create" class="btn btn-primary ">Đăng bài mới</a>
@@ -22,10 +22,22 @@
         <thead>
             <tr>
                 <th scope='col' colspan="2">#</th>
-                <th scope='col'>Tên</th>
-                <th scope='col'>Mô tả</th>
-                <th scope='col'>Video ID</th>
-                <th scope='col'>Thời gian tạo</th>
+                <th scope='col'>
+                Tên
+                {{{sortable 'name' _sort}}}
+                </th>
+                <th scope='col'>
+                Mô tả
+                {{{sortable 'description' _sort}}}
+                </th>
+                <th scope='col'>
+                Video ID
+                {{{sortable 'videoId' _sort}}}
+                </th>
+                <th scope='col'>
+                Thời gian tạo
+                {{{sortable 'createdAt' _sort}}}
+                </th>
                 <th scope='col'></th>
             </tr>
         </thead>
@@ -107,7 +119,8 @@
     var slugName; 
     var btnDeleteCourse = document.getElementById('btn-delete-course'); 
     var deleteForm = document.forms['delete-course-form'];
-    var containerForm = document.forms['container-form'];
+    //var containerForm = document.forms['container-form'];
+    var containerForm = $('form[name="container-form"]');
     var checkboxAll = $('#checkbox-all');
     var courseItemCheckbox = $('input[name="courseSlugs[]"]');
     var checkAllSubmitBtn = $('.check-all-submit-btn');
@@ -128,23 +141,14 @@
           var isCheckedAll = courseItemCheckbox.length === $('input[name="courseSlugs[]"]:checked').length;
           checkboxAll.prop('checked', isCheckedAll);
           renderCheckAllSubmitBtn();
-        });
-    //check all submit btn clicked
-    checkAllSubmitBtn.click(function(e){
-        e.preventDefault();
-        var isSubmitAble = !$(this).hasClass('disabled');
-        if(isSubmitAble){
-            containerForm.submit();
-        }
-        });
-
+        });        
     //Re-render check all submit button
     function renderCheckAllSubmitBtn(){
       var checkedCount = $('input[name="courseSlugs[]"]:checked').length;
       if(checkedCount > 0){
-        checkAllSubmitBtn.removeClass('disabled');
+        checkAllSubmitBtn.attr('disabled', false);
       }else{
-        checkAllSubmitBtn.addClass('disabled');
+        checkAllSubmitBtn.attr('disabled', true);
       }
     }
     });
