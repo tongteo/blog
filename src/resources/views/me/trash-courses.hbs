@@ -12,7 +12,7 @@
                 <th scope='col'>Tên</th>
                 <th scope='col'>Mô tả</th>
                 <th scope='col'>Video ID</th>
-                <th scope='col'>Thời gian tạo</th>
+                <th scope='col'>Thời gian xóa </th>
                 <th scope='col'></th>
             </tr>
         </thead>
@@ -23,7 +23,7 @@
                     <td>{{this.name}}</td>
                     <td>{{this.description}}</td>
                     <td>{{this.videoId}}</td>
-                    <td>{{this.createdAt}}</td>
+                    <td>{{this.deletedAt}}</td>
                     <td>
                         <a
                             href=''
@@ -65,7 +65,7 @@
                 </button>
             </div>
             <div class='modal-body'>
-                <p>Bạn chắc chắn muốn xóa bài này?</p>
+                <p>Hành động này không thể khôi phục. Bạn chắc chắn muốn xóa?</p>
             </div>
             <div class='modal-footer'>
                 <button
@@ -77,7 +77,7 @@
                     id='btn-delete-course'
                     type='button'
                     class='btn btn-danger'
-                >Xóa bỏ</button>
+                >Xóa vĩnh viễn </button>
             </div>
         </div>
     </div>

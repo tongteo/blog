@@ -58,5 +58,17 @@ class CourseController {
             .then(() => res.redirect('back'))
             .catch(next);
     }
+    //[POST] /courses/handleFormAction
+    handleFormAction(req, res, next) {
+        switch (req.body.action) {
+            case 'delete':
+                Course.delete({ slug: { $in: req.body.courseSlugs } })
+                    .then(() => res.redirect('back'))
+                    .catch(next);
+                break;
+            default:
+                res.json({ message: 'Unknown action' });
+        }
+    }
 }
 module.exports = new CourseController();
